@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>Pantaloons</name>
-	<comment/>
+	<name>pantaloons-flex</name>
+	<comment></comment>
 	<projects>
 	</projects>
 	<buildSpec>
@@ -12,7 +12,19 @@
 		</buildCommand>
 	</buildSpec>
 	<natures>
+		<nature>com.adobe.flexbuilder.project.flexnature</nature>
 		<nature>com.adobe.flexbuilder.project.actionscriptnature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>[source path] as3-crypto-src</name>
+			<type>2</type>
+			<location>C:/Users/FTVEN/Documents/GitHub/as3-crypto/src</location>
+		</link>
+		<link>
+			<name>[source path] hlsprovider-src</name>
+			<type>2</type>
+			<location>C:/Users/FTVEN/Documents/GitHub/hlsprovider/src</location>
+		</link>
+	</linkedResources>
 </projectDescription>
-
