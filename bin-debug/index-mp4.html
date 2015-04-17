@@ -1,0 +1,47 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="history/history.css" />
+    <script type="text/javascript" src="history/history.js"></script>
+    <!-- END Browser History required section -->  
+	    
+    <script type="text/javascript" src="swfobject.js"></script>
+    <script type="text/javascript">
+        <!-- For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. --> 
+        var swfVersionStr = "10.0.0";
+        <!-- To use express install, set to playerProductInstall.swf, otherwise the empty string. -->
+        var xiSwfUrlStr = "playerProductInstall.swf";
+        //var flashvars = {file: 'FILENAME.VWM', type: 'video' , skin: 'skin/pantaloons.xml', repeat: 'always' };
+	var flashvars = {file: '254981996.mp4', type: 'video' , skin: 'skin/pantaloons.xml', repeat: 'always', projectiontype:'equirectangular', panmin: '0', panmax: '180' };
+
+        var params = {};
+        params.quality = "high";
+        params.bgcolor = "#ffffff";
+        params.allowscriptaccess = "sameDomain";
+        params.allowfullscreen = "true";
+        var attributes = {};
+        attributes.id = "JWPlayer";
+        attributes.name = "JWPlayer";
+        attributes.align = "middle";
+        swfobject.embedSWF(
+            "JWPlayerFlex.swf", "flashContent", 
+            "800", "450", 
+            swfVersionStr, xiSwfUrlStr, 
+            flashvars, params, attributes);
+		<!-- JavaScript enabled so display the flashContent div in case it is not replaced with a swf object. -->
+		swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+    </script>
+</head>
+<body>
+ 	<div class="player" id="flashContent">
+	       	<p>
+	        	To view this page ensure that Adobe Flash Player version 
+				10.0.0 or greater is installed. 
+			</p>
+			<script type="text/javascript"> 
+				var pageHost = ((document.location.protocol == "https:") ? "https://" :	"http://"); 
+				document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
+								+ pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" ); 
+			</script> 
+       </div>
+</body>
+</html>

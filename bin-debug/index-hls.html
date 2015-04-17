@@ -1,0 +1,77 @@
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="history/history.css" />
+    <script type="text/javascript" src="history/history.js"></script>
+    <!-- END Browser History required section -->  
+	    
+    <script type="text/javascript" src="swfobject.js"></script>
+    <script type="text/javascript">
+        <!-- For version detection, set to min. required Flash Player version, or 0 (or 0.0.0), for no version detection. --> 
+        var swfVersionStr = "10.0.0";
+        <!-- To use express install, set to playerProductInstall.swf, otherwise the empty string. -->
+        var xiSwfUrlStr = "playerProductInstall.swf";
+        //var flashvars = {file: 'FILENAME.VWM', type: 'video' , skin: 'skin/pantaloons.xml', repeat: 'always' };
+        var flashvars = {
+            file: 'http://ftvodhdsecz-f.akamaihd.net/i/test/CT/50397-1428499680-1-,1920x960-6272k,1920x960-4224k,1920x960-2176k,.mp4.csmil/master.m3u8',
+            type: 'hls' ,
+            
+            skin: 'skin/pantaloons.xml',
+            repeat: 'false',
+            projectiontype:'equirectangular',
+            panmin: '0',
+            panmax: '180',
+
+            hls_debug: true,
+            hls_debug2: false,
+            hls_minbufferlength: -1,
+            hls_lowbufferlength: 2,
+            hls_maxbufferlength: 60,
+            hls_startfromlowestlevel: false,
+            hls_seekfromlowestlevel: false,
+            hls_live_flushurlcache: false,
+            hls_seekmode: 'ACCURATE'
+
+        };
+
+        /*http://ftvodhdsecz-f.akamaihd.net/i/test/CT/50397-1428499680-1-,1920x960-6272k,1920x960-4224k,1920x960-2176k,.mp4.csmil/master.m3u8*/
+        /*http%3A%2F%2Fftvodhdsecz-f.akamaihd.net%2Fi%2Ftest%2FCT%2F50397-1428499680-1-%2C1920x960-6272k%2C1920x960-4224k%2C1920x960-2176k%2C.mp4.csmil%2Fmaster.m3u8*/
+        /*http://ftvodhdsecz-f.akamaihd.net/z/test/CT/50397-1428499680-1-,1920x960-6272k,1920x960-4224k,1920x960-2176k,.mp4.csmil/manifest.f4m*/
+        
+
+        var params = {
+            allowFullScreen: true
+            , allowScriptAccess: "always"
+            , bgcolor: "#000000"
+        };
+        params.quality = "high";
+        params.bgcolor = "#ffffff";
+        params.allowscriptaccess = "sameDomain";
+        params.allowfullscreen = "true";
+        var attributes = {};
+        attributes.id = "JWPlayer";
+        attributes.name = "JWPlayer";
+        attributes.align = "middle";
+        swfobject.embedSWF(
+            "JWPlayerFlex.swf", "flashContent", 
+            1200, 675,
+            swfVersionStr, xiSwfUrlStr, 
+            flashvars, params, attributes);
+		<!-- JavaScript enabled so display the flashContent div in case it is not replaced with a swf object. -->
+		swfobject.createCSS("#flashContent", "display:block;text-align:left;");
+    </script>
+</head>
+<body>
+ 	<div class="player" id="flashContent">
+	       	<p>
+	        	To view this page ensure that Adobe Flash Player version 
+				10.0.0 or greater is installed. 
+			</p>
+			<script type="text/javascript"> 
+				var pageHost = ((document.location.protocol == "https:") ? "https://" :	"http://"); 
+				document.write("<a href='http://www.adobe.com/go/getflashplayer'><img src='" 
+								+ pageHost + "www.adobe.com/images/shared/download_buttons/get_flash_player.gif' alt='Get Adobe Flash player' /></a>" ); 
+			</script> 
+       </div>
+</body>
+</html>
+
