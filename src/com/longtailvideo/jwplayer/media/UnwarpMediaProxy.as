@@ -256,7 +256,8 @@ package com.longtailvideo.jwplayer.media
 				_width = 320;
 				_height = 240;
 			}
-			_projector = new Projector(_subProvider.getRawMedia(), projection, _viewProjection, _width, _height);
+			var rawMedia:DisplayObject = _subProvider.getRawMedia()
+			_projector = new Projector(rawMedia, projection, _viewProjection, _width, _height);
 			
 		}
 		

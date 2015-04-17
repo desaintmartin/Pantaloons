@@ -14,6 +14,8 @@ package com.longtailvideo.jwplayer.model {
 	import com.longtailvideo.jwplayer.media.YouTubeMediaProvider;
 	import com.longtailvideo.jwplayer.player.PlayerState;
 	
+	import com.longtailvideo.jwplayer.media.HLSMediaProvider;
+	
 	import flash.events.Event;
 
 	/**
@@ -158,6 +160,8 @@ package com.longtailvideo.jwplayer.model {
 			setMediaProvider('sound', new UnwarpMediaProxy(new SoundMediaProvider()));
 			setMediaProvider('image', new UnwarpMediaProxy(new ImageMediaProvider()));
 			setMediaProvider('youtube', new UnwarpMediaProxy(new YouTubeMediaProvider()));
+			
+			setMediaProvider('hls', new UnwarpMediaProxy(new HLSMediaProvider()));
 
 			setActiveMediaProvider('default');
 		}

@@ -516,6 +516,7 @@ package com.longtailvideo.jwplayer.controller {
 					_model.playlist.load(item.file)
 				}
 			} catch (err:Error) {
+				Logger.log("Error at loadPlaylistItem : " + err);
 				return false;
 			}
 			return true;

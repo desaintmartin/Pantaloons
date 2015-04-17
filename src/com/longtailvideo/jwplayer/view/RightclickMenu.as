@@ -35,7 +35,7 @@ package com.longtailvideo.jwplayer.view {
 		/** Stretching menu item **/
 		protected var stretching:ContextMenuItem;
 		/** Go to gopano.com menu item **/
-		protected var goto: ContextMenuItem;
+		protected var goTo: ContextMenuItem;
 	
 		/** Constructor. **/
 		public function RightclickMenu(player:IPlayer, clip:MovieClip) {
@@ -64,8 +64,8 @@ package com.longtailvideo.jwplayer.view {
 			addItem(stretching, stretchHandler);
 			setAboutText();
 			addItem(about, aboutHandler);
-			goto = new ContextMenuItem("Go to GoPano.com");
-			addItem(goto, gotoHanlder);
+			goTo = new ContextMenuItem("Go to GoPano.com");
+			addItem(goTo, gotoHanlder);
 			if (Capabilities.isDebugger == true) {
 				debug = new ContextMenuItem('Logging to ' + _player.config.debug + '...');
 				addItem(debug, debugHandler);
