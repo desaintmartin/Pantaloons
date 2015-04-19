@@ -14,7 +14,9 @@ package com.longtailvideo.jwplayer.model {
 	import com.longtailvideo.jwplayer.media.YouTubeMediaProvider;
 	import com.longtailvideo.jwplayer.player.PlayerState;
 	
-	import com.longtailvideo.jwplayer.media.HLSMediaProvider;
+	//import com.longtailvideo.jwplayer.media.HLSMediaProvider; // Home-made media
+	//import com.longtailvideo.jwplayer.media.HLSProvider; // ?
+	import org.mangui.jwplayer.media.HLSProvider; // Comes from flashls "chineese" version
 	
 	import flash.events.Event;
 
@@ -161,8 +163,8 @@ package com.longtailvideo.jwplayer.model {
 			setMediaProvider('image', new UnwarpMediaProxy(new ImageMediaProvider()));
 			setMediaProvider('youtube', new UnwarpMediaProxy(new YouTubeMediaProvider()));
 			
-			setMediaProvider('hls', new UnwarpMediaProxy(new HLSMediaProvider()));
-
+			//setMediaProvider('hls', new UnwarpMediaProxy(new HLSMediaProvider()));
+			setMediaProvider('hls', new UnwarpMediaProxy(new HLSProvider()));
 			setActiveMediaProvider('default');
 		}
 
