@@ -502,7 +502,7 @@ package com.longtailvideo.jwplayer.controller {
 				_lockingResume = true;
 				return false;
 			}
-			try {
+			//try {
 				if (!item.provider) {
 					JWParser.updateProvider(item);
 				}
@@ -515,10 +515,10 @@ package com.longtailvideo.jwplayer.controller {
 				} else if (item.file) {
 					_model.playlist.load(item.file)
 				}
-			} catch (err:Error) {
-				Logger.log("Error at loadPlaylistItem : " + err);
-				return false;
-			}
+			//} catch (err:Error) {
+			//	Logger.log("Error at loadPlaylistItem : " + err);
+			//	return false;
+			//}
 			return true;
 		}
 
