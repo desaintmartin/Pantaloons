@@ -11,15 +11,18 @@ package com.longtailvideo.jwplayer.geometry
 	import flash.display.Shader;
 	import flash.display.ShaderJob;
 	import flash.display.ShaderPrecision;
+	import flash.display.Sprite;
 	import flash.events.Event;
 	import flash.events.EventDispatcher;
 	import flash.events.ShaderEvent;
+	import flash.geom.ColorTransform;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
 	import flash.media.Video;
 	import flash.utils.getTimer;
-
+	
+	
 	public class Projector extends EventDispatcher
 	{
 		/* the original media we are supposed to transform */
@@ -223,7 +226,7 @@ package com.longtailvideo.jwplayer.geometry
 						
 						/*_projectedBitmap.draw(_sourceBitmap, transformMatrix, null, null, null, true);		*/
 						_projectedBitmap.draw(_sourceBitmap, null, null, null, _clipRect, true);	
-				
+						
 					} else {
 						_shader.data.src.input = _sourceBitmap;
 						_shaderJob = new ShaderJob(_shader, _projectedBitmap, _shaderWidth, _shaderHeight);
@@ -273,7 +276,7 @@ package com.longtailvideo.jwplayer.geometry
 		public function refreshSource():void
 		{	
 			/*_sourceBitmap.draw(_drawable, _transformMatrix, null, null, _clipRect, true);*/
-			_sourceBitmap.draw(_drawable, _transformMatrix, null, null, _clipRect, false);
+			draw(_sourceBitmap, _drawable, _transformMatrix, null, null, _clipRect, false);
 		}
 		
 		public function resize(width:Number, height:Number):void
@@ -547,8 +550,22 @@ package com.longtailvideo.jwplayer.geometry
 			_sourceBitmap = new BitmapData(w, h, false);
 			/* just for now I'm going to leave the transform matrix out */
 			/*_sourceBitmap.draw(_drawable, _transformMatrix, null, null, _clipRect, true);*/
-			_sourceBitmap.draw(_drawable, _transformMatrix, null, null, _clipRect, false);
+			//_sourceBitmap.draw(_drawable, _transformMatrix, null, null, _clipRect, false);
+			draw(_sourceBitmap, _drawable, _transformMatrix, null, null, _clipRect, false);
+		}
 		
+		private function draw(bitmapData:BitmapData, source:IBitmapDrawable, matrix:Matrix, colorTransform:ColorTransform, blendMode:String, clipRect:Rectangle, smoothing:Boolean):void {
+			// NetStream.play(null) + bitmapData.draw = Sandbox error 
+			// Bug description: https://bugbase.adobe.com/index.cfm?event=bug&id=3617751
+			// Workaround: http://gamespoweredby.com/blog/2014/11/netstream-playnull-bitmapdata-workaround/
+			var vidContainer : Sprite = new Sprite();
+			vidContainer.addChild(source);
+			var bufferContainer : Sprite = new Sprite();
+			// Works only with Flash 11.6 and newer
+			// http://sleepydesign.blogspot.fr/2012/04/flash-swf-version-meaning.html
+			bufferContainer.graphics.drawGraphicsData( vidContainer.graphics.readGraphicsData() );
+			bitmapData.draw(bufferContainer, matrix, colorTransform, blendMode, clipRect, smoothing);
+			
 		}
 		
 		public function get media():Bitmap
