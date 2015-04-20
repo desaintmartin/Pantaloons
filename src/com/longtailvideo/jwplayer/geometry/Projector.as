@@ -21,6 +21,7 @@ package com.longtailvideo.jwplayer.geometry
 	import flash.geom.Rectangle;
 	import flash.media.Video;
 	import flash.utils.getTimer;
+	import flash.display.IGraphicsData;
 	
 	
 	public class Projector extends EventDispatcher
@@ -558,12 +559,13 @@ package com.longtailvideo.jwplayer.geometry
 			// NetStream.play(null) + bitmapData.draw = Sandbox error 
 			// Bug description: https://bugbase.adobe.com/index.cfm?event=bug&id=3617751
 			// Workaround: http://gamespoweredby.com/blog/2014/11/netstream-playnull-bitmapdata-workaround/
-			var vidContainer : Sprite = new Sprite();
+			var vidContainer:Sprite = new Sprite();
 			vidContainer.addChild(source);
-			var bufferContainer : Sprite = new Sprite();
+			var bufferContainer:Sprite = new Sprite();
 			// Works only with Flash 11.6 and newer
 			// http://sleepydesign.blogspot.fr/2012/04/flash-swf-version-meaning.html
-			bufferContainer.graphics.drawGraphicsData( vidContainer.graphics.readGraphicsData() );
+			var graphicsData:Vector.<IGraphicsData> = vidContainer.graphics.readGraphicsData()
+			bufferContainer.graphics.drawGraphicsData(graphicsData);
 			bitmapData.draw(bufferContainer, matrix, colorTransform, blendMode, clipRect, smoothing);
 			
 		}
