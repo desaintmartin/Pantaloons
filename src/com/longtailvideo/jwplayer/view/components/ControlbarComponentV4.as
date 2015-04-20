@@ -281,7 +281,8 @@ package com.longtailvideo.jwplayer.view.components {
 			if (front && evt.target['icon']) {
 				evt.target['icon'].transform.colorTransform = front;
 			} else {
-				evt.target.gotoAndPlay('out');
+				//evt.target.gotoAndPlay('out');
+				evt.target.play();
 			}
 		}
 
@@ -291,7 +292,8 @@ package com.longtailvideo.jwplayer.view.components {
 			if (front && evt.target['icon']) {
 				evt.target['icon'].transform.colorTransform = light;
 			} else {
-				evt.target.gotoAndPlay('over');
+				//evt.target.gotoAndPlay('over');
+				evt.target.play(); // ?
 			}
 		}
 
