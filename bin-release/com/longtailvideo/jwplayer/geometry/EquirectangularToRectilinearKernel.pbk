@@ -1,0 +1,78 @@
+
+<languageVersion : 1.0;>
+
+kernel EquirectangularToPerspectiveVertical
+<   namespace : "com.eyesee360";
+    vendor : "EyeSee360";
+    version : 1;
+    description : "Equirectangular to Perspective";
+    displayname : "Equirectangular to Perspective";
+>
+{
+    input image4 src;
+    output pixel4 dst;
+    
+    parameter float2 inputDimensions
+    <
+        minValue : float2(1.0,1.0);
+        maxValue : float2(8000.0,8000.0);
+        defaultValue: float2(2000.0, 1000.0); 
+    >;
+
+    parameter float2 outputDimensions
+    <
+        minValue : float2(1.0, 1.0);
+        maxValue : float2(8000.0, 8000.0);
+        defaultValue : float2(512.0,512.0);
+    >;
+
+    parameter float4 equirectangularBoundsRad
+    <
+        minValue : float4(-6.283185307179586, -1.570796326794897, 0.01, 0.01);
+        maxValue : float4(6.283185307179586, 1.570796326794897, 6.283185307179586, 3.141592653589793);
+        defaultValue : float4(0.0, -1.570796326794897, 6.283185307179586, 3.141592653589793);
+    >;
+    
+	parameter float3x3 rotationMatrix
+	<
+		description : "rotation matrix for viewing";
+		defaultValue : float3x3(1);	// identity
+	>;
+
+    parameter float4 viewBounds
+    < 
+        minValue : float4(-10.0, -10.0, 0.01, 0.01);
+        maxValue : float4(10.0, 10.0, 10.0, 10.0);
+        defaultValue : float4(-1.0, -1.0, 2.0, 2.0); 
+    >;
+
+    void evaluatePixel()
+    {
+        // Normalized output coordinate (between 0 and 1)
+		float2 outputPoint = outCoord() * outputDimensions;
+        float2 planePoint = outputPoint * viewBounds.zw + viewBounds.xy;
+		float2 angle;
+
+		// Perspective to 3-position
+		float3 position;
+		position.xy = planePoint;
+		position.z = 1.0;
+		position = normalize(position);
+	
+		// 3-axis Rotation
+		position = position * rotationMatrix;
+		
+		// Angle from position
+		angle = float2(-atan(position.z, position.x), asin(position.y));
+	
+		// Angle to equirectangular
+        float2 inputPoint = (angle - equirectangularBoundsRad.xy) * equirectangularBoundsRad.zw;
+        inputPoint.x = mod(inputPoint.x, 1.0);  // wraparound
+        
+        // Denormalize coordinate
+        inputPoint *= inputDimensions;
+
+		// Sample the pixel
+        dst = sample(src,inputPoint);
+    }
+}

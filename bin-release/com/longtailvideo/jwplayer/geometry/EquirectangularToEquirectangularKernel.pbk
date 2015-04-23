@@ -1,0 +1,69 @@
+
+<languageVersion : 1.0;>
+
+kernel EquirectangularToEquirectangular
+<   namespace : "com.eyesee360";
+    vendor : "EyeSee360";
+    version : 1;
+    description : "Equirectangular to Equirectangular";
+    displayname : "Equirectangular to Equirectangular";
+>
+{
+    #define PI 3.14159265
+    input image4 src;
+    output pixel4 dst;
+    
+    parameter float2 inputDimensions
+    <
+        minValue : float2(1.0,1.0);
+        maxValue : float2(8000.0,8000.0);
+        defaultValue: float2(1360.0, 1032.0); 
+    >;
+
+    parameter float2 outputDimensions
+    <
+        minValue : float2(0.0, 0.0);
+        maxValue : float2(1.0, 1.0);
+        defaultValue : float2(1.0/512.0,1.0/512.0);
+    >;
+    
+    // not used 
+    parameter float4 viewBounds
+    < 
+        minValue : float4(-10.0, -10.0, 0.01, 0.01);
+        maxValue : float4(10.0, 10.0, 10.0, 10.0);
+        defaultValue : float4(-1.0, -1.0, 2.0, 2.0); 
+    >;
+    
+    parameter float4 equirectangularBoundsRad
+    <
+        defaultValue: float4(0, -PI/2.0, PI*2.0, PI);
+    >;
+
+	parameter float rotationMatrix
+	<
+		description : "rotation matrix for viewing";
+		defaultValue : 0.0;	// identity
+	>;
+
+    void evaluatePixel()
+    {
+        // Normalized output coordinate (between 0 and 1)
+		float2 outputPoint = outCoord() * outputDimensions;
+        float2 planePoint = outputPoint * viewBounds.zw + viewBounds.xy;
+        float4 noused = equirectangularBoundsRad;
+        
+        // Rotate the image
+        float2 inputPoint = outputPoint;
+        
+        inputPoint.x += rotationMatrix;
+        
+        inputPoint.x = mod(inputPoint.x, 1.0);  // wraparound
+        
+        // Denormalize coordinate   
+        inputPoint *= inputDimensions;
+
+		// Sample the pixel
+        dst = sample(src,inputPoint);
+    }
+}
